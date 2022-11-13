@@ -1,0 +1,46 @@
+<section >
+  <div class="container" style="margin-left:200px;">
+    <table class="table table-hover table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Adress</th>
+          <th scope="col">Order date</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>            
+          <th scope="col">Payment</th>
+          <th scope="col" style="width:100px ;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+          <tr>   
+            <td scope="row"><strong>{{{inc @index}}}</strong></td>
+            <td>{{this.products.name}}</td>
+            <td>{{this.deliveryDetails.address}}</td>
+            <td>{{this.displayDate}}</td>
+            <td>{{this.quantity}}</td>
+            <td>{{this.products.offerPrice}}</td>
+            <td>{{this.paymentMethod}}</td>
+            <td id="{{this._id}}{{this.products._id}}">{{this.proStatus}}</td>
+            <td><select id="{{this.products._id}}{{this._id}}" onchange="changeStatus('{{this.products._id}}','{{this._id}}')" class="form-select custom" aria-label="Default select example">
+                 <option selected="true" disabled="disabled">{{this.proStatus}}</option>
+                 <option value="placed">PLACED</option>
+                 <option value="pending">PENDING</option>
+                 <option value="shipped">SHIPPED</option>
+                 <option value="delivered">DELIVERED</option>
+                 <option value="cancelled">CANCELLED</option>
+               </select></td>
+         </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .custom:hover{
+    cursor: pointer;
+  }
+</style>

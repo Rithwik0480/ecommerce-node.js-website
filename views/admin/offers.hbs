@@ -1,0 +1,120 @@
+<section style="margin-left: 200px ;">
+    <div class="container d-flex p-5">
+            <div>
+                <div class="modal fade" id="categoryOffer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Category Offer</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       </div>
+                       <form action="/admin/offers/category-offers" method="post">
+                       <div class="modal-body">
+                         
+                           {{!-- <div class="mb-3">
+                             <select class="form-select" aria-label="Default select example" name="category">
+                                <option selected disabled>Select Category</option>
+                                {{#each category}}
+                                    <option value="{{this.category}}">{{this.category}}</option>
+                                {{/each}}
+                             </select>
+                           </div> --}}
+                            <div class="bg-light mb-3">
+                                <label for="category">Select Category</label>
+                                {{#each category}}
+                                <br><input name="category" type="radio" value="{{this.category}}">{{this.category}}</input>
+                                {{/each}}
+                            </div>      
+                           <div class="mb-3">
+                             <label for="message-text" class="col-form-label">Enter offer percentage:</label>
+                             <input type="number" class="form-control" name="percentage">
+                           </div>
+                       </div>
+                       <div class="modal-footer">
+                         <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Apply</button>
+                       </div>
+                       </form>
+                     </div>
+                   </div>
+                </div>
+            
+            <table class="table table-responsive p-5">
+                <thead>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#categoryOffer" data-bs-whatever="@mdo"><span class="fa fa-plus"></span> Add Category Offer</button></td>
+                    <tr>
+                    <th>Category</th>
+                    <th>Offer percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each categoryOffer}}
+                    <tr>
+                    <td>{{this.category}}</td>
+                    <td>{{this.categoryOffer}} <span class="fa fa-percentage"></span></td>
+                    
+                    <td><button class="fa fa-trash text-danger btn" onclick="deleteCatOffer('{{this.category}}')"></button></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        
+
+
+            <div>
+                <div class="modal fade" id="productOffer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Product Offer</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       </div>
+                       <form id="addProductOffers" method="post">
+                       <div class="modal-body">
+                           <div class="mb-3">
+                             <select name="product" class="form-select" aria-label="Default select example">
+                                <option selected disabled>Select Product</option>
+                                {{#each product}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                             </select>
+                           </div>
+                           <div class="mb-3">
+                             <label for="message-text" class="col-form-label">Enter offer percentage:</label>
+                             <input type="number" class="form-control" name="percentage">
+                           </div>
+                         
+                       </div>
+                       <div class="modal-footer">
+                         <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Apply</button>
+                       </div>
+                       </form>
+                     </div>
+                   </div>
+                </div>
+            
+            <table class="table table-responsive p-5">                
+                <thead>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#productOffer" data-bs-whatever="@mdo"><span class="fa fa-plus"></span> Add Product Offer</button></td>
+                    <tr>
+                    <th>product</th>
+                    <th>Offer Percentage</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {{#each productOffer}}
+                    <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.productOffer}} <span class="fa fa-percentage"></span></td>
+                    <td><button class="fa fa-trash text-danger btn" onclick="deleteProdOffer('{{this._id}}')"></button></td>
+                    </tr>
+                    {{/each}}
+                    
+                </tbody>
+            </table>
+        </div>
+
+     </div> {{!--total container--}}
+</section>

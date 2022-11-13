@@ -1,0 +1,69 @@
+<section>
+    <div class="container" style="margin-left:100px">
+        {{!-- <div class="title mb-5">
+            <p>Hai, &#128075; {{user.username}}</p>
+        </div> --}}
+        <div class="d-flex align-items-center mb-4">
+            <div class="text-decor"><h2 class="text-muted mt-3">Order History</h2></div>
+        </div>
+
+        {{#each orders}}
+        <div class="card mb-3">
+            <h5 class="card-header" style="background-color:black; color:white; font-size: 15px;">Ordered On: {{this.displayDate}}
+            </h5>
+            <div class="d-flex card-font-size">
+                <img class="img-fluid ms-2 my-2" src="{{this.productInfo.image.[0]}}"
+                    alt="Card image" width="120">
+                <div class="card-body ms-5 w-25">
+                    <h5 class="card-title">{{this.productInfo.name}}</h5>
+                    <p class="card-text">Quantity: {{this.quantity}}</p>
+                    <p class="card-text">Price: ₹{{this.productInfo.offerPrice}}</p>  
+                </div>
+                {{#eq this.proStatus 'return'}}
+                <div class="card-body w-25">
+                    <p class="alert alert-info">Product is returned</p>
+                </div>
+                {{else}}
+                <div class="card-body w-25">
+                    <p class="card-text">{{this.deliveryDetails.address}}</p>
+                    <p class="card-text">{{this.deliveryDetails.city}},{{this.deliveryDetails.state}}</p>
+                    
+                    <p class="card-text">Pin Code: {{this.deliveryDetails.zipCode}}</p>
+                    <p class="card-text">{{this.deliveryDetails.phoneNumber}}</p>
+                </div>
+                {{/eq}}
+                <div class="card-body">
+                {{#eq this.proStatus 'cancelled'}}
+                <p class="alert alert-danger">order is cancelled</p>
+                {{else}}
+                <p class="card-text">Payment Method: {{this.paymentMethod}}</p>
+                <p>Order Status : <span class="badge badge-boxed badge-soft-warning">{{this.proStatus}}</span></p>
+                <button type="submit" class="rounded btn btn-outline-danger" onclick="cancelOrder('{{this._id}}','{{this.productInfo._id}}')">Cancel Order</button>
+                {{/eq}}
+
+                {{#eq this.proStatus 'delivered'}}
+                <button type="submit" class="rounded btn btn-outline-danger" onclick="returnOrder('{{this._id}}','{{this.productInfo._id}}')">Return Order</button>
+                {{/eq}}
+                </div>
+
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</section>  
+
+<style>
+    .badge-soft-warning {
+    background-color: rgba(248,201,85,.2);
+    color: #f8c955;
+}
+
+.badge {
+    font-weight: 500;
+    font-size: ;
+}
+.badge-soft-primary {
+    background-color: rgba(96,93,175,.2);
+    color: #605daf;
+}
+</style>

@@ -1,0 +1,82 @@
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders" style="background-color: transparent;">
+        <a class="nav-link" href="/user/profile" target="__blank">Profile</a>
+        <a class="nav-link" href="/user/addressBook" target="__blank">Address Book</a>
+        <a class="nav-link active active" href="/user/wallet" target="__blank">Wallet</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+
+
+    <section>
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Sneaker Wallet</h5>
+    <p class="card-text">Wallet Balance: ₹{{walletDetails.walletBalance}}</p>
+    </div>
+    </div>
+    </section>
+
+    <section>
+    <div class="card mt-5" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">My Referral ID</h5>
+    <p class="card-text">{{walletDetails.referralId}}</p>
+    </div>
+    </div>
+    </section>
+
+
+</div>    
+
+<style>
+    
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+    font-weight: 500;
+}
+.card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control, .dataTable-input {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #69707a;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c5ccd6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.35rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+ .nav-borders .nav-link.active { color: #111;
+  border-bottom-color: #111; } 
+  
+.nav-borders .nav-link {
+    color: #69707a;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+</style>

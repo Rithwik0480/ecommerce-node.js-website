@@ -1,0 +1,354 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/A.bootstrap.min.css+font-awesome.min.css+elegant-icons.css+magnific-popup.css+nice-select.css+owl.carousel.min.css+slicknav.min.css+style.css,Mcc.f6PPq5zNCp.css.pagespeed.cf.5SlTa9kfBa.css" type="text/css" />
+
+<div id="preloder">
+<div class="loader"></div>
+</div>
+
+<div class="offcanvas-menu-overlay"></div>
+
+  {{#each bannerData}}
+<section class="hero">
+
+<div class="hero__slider owl-carousel">
+
+<div class="hero__items set-bg" data-setbg="{{this.image}}">
+
+<div class="container">
+<div class="row">
+<div class="col-xl-5 col-lg-7 col-md-8">
+<div class="hero__text">
+<h2 class="text-light"></h2>
+<h2 class="text-light">{{this.description}}</h2>
+<p class="text-light">A campaign aimed at female empowerment across the world through the power of representation and bold voices.</p>
+<a href="/user/shop/women" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+<div class="hero__social">
+<a href="#"><i class="fa fa-facebook"></i></a>
+<a href="#"><i class="fa fa-twitter"></i></a>
+<a href="#"><i class="fa fa-pinterest"></i></a>
+<a href="#"><i class="fa fa-instagram"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{{!-- 
+<div class="hero__items set-bg" data-setbg="{{this.image}}">
+<div class="container">
+<div class="row">
+<div class="col-xl-5 col-lg-7 col-md-8">
+<div class="hero__text">
+<h2 class="text-light"></h2>
+<h2 class="text-dark">{{this.description}}</h2>
+<p class="text-dark">A campaign aimed at female empowerment across the world through the power of representation and bold voices.</p>
+<a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+<div class="hero__social">
+<a href="#"><i class="fa fa-facebook"></i></a>
+<a href="#"><i class="fa fa-twitter"></i></a>
+<a href="#"><i class="fa fa-pinterest"></i></a>
+<a href="#"><i class="fa fa-instagram"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div> --}}
+</div>
+
+</section>
+{{/each}}
+
+<section class="banner spad">
+<div class="container">
+<div class="row">
+<div class="col-lg-7 offset-lg-4">
+<div class="banner__item">
+<div class="banner__item__pic">
+<img src="img/banner/xbanner-1.jpg.pagespeed.ic.nZTivFR0IB.jpg" alt="" data-pagespeed-url-hash="4055211103" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+</div>
+<div class="banner__item__text">
+<h2>Clothing Collections 2022</h2>
+<a href="#">Shop now</a>
+</div>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="banner__item banner__item--middle">
+<div class="banner__item__pic">
+<img src="img/banner/xbanner-2.jpg.pagespeed.ic.pbodzVtQKw.jpg" alt="" data-pagespeed-url-hash="54743728" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+</div>
+<div class="banner__item__text">
+<h2>Accessories</h2>
+<a href="#">Shop now</a>
+</div>
+</div>
+</div>
+<div class="col-lg-7">
+<div class="banner__item banner__item--last">
+<div class="banner__item__pic">
+<img src="img/banner/xbanner-3.jpg.pagespeed.ic.53F3MtBYv-.jpg" alt="" data-pagespeed-url-hash="349243649" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+</div>
+<div class="banner__item__text">
+<h2>Shoes Spring 2022</h2>
+<a href="#">Shop now</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="product spad" style="margin-top: 20rem;">
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<ul class="filter__controls d-flex">
+<li class="active" data-filter="*"><h2 class=" text-secondary" style="font-weight:bold;">Hot Offers</h2></li>
+{{!-- <li data-filter=".new-arrivals">New Arrivals</li>
+<li data-filter=".hot-sales">Hot Sales</li> --}}
+</ul>
+</div>
+</div>
+
+<div class="row product__filter">
+{{#each product}}
+<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">{{!--Card--}}
+<div class="product__item">
+<a href="/user/productDetails/{{this._id}}">
+<div class="product__item__pic set-bg" data-setbg="{{this.image.[0]}}">
+<span class="label"><s class="text-danger" style="font-size:1rem;">₹{{this.actualPrice}}</s></span>
+<ul class="product__hover">
+<li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAMAAADjcdz2AAAABGdBTUEAALGPC/xhBQAAAORQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFsLyIwAAAEt0Uk5TABB1xu7MfxY/5fiteJ/x71A79sIgEaT9TAjexweh7V7+Kw/sqMSXzpRn5pJm6Kq+kMP7IwndugORPbETjk9D8GOK4/oByPKCFU551a0uSgAAAJ5JREFUGNNdy9UWggAURNGDHSi2mJhgYWJ3i/7///gAyFrO2+y5F0DweH0+fyCInVA4EhU9sbiUsHoylc4AZHN5GaBQLJXt00pVAJRa3fltNEWg1eYXtQ1oHRe6PUDruzDQgeHIhfEEUKYzpxu6CBjzxdKGlSQArFObLYCx++yt4aAf1ZNyvhyv6s0SQbxLD+35Mn/ixLzu+JfAn8jvLyoND535naQeAAAAAElFTkSuQmCC" alt="" data-pagespeed-url-hash="3756334862" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"><a href="/user/productDetails/{{this._id}}"><span>View Product</span></a></li>
+</ul>
+</div>
+</a>
+<div class="product__item__text">
+<a href="/user/productDetails/{{this._id}}"></a>
+<h6>{{this.name}}</h6>
+<a class="add-cart"><button onclick="addToCart('{{this._id}}')" style="background:none; border:none ;">Add to Bag <i class="fa fa-shopping-cart"></i></button></a>
+<h5>Rs.{{this.offerPrice}}</h5>
+</div>
+</div>
+</div>
+{{/each}}
+</div>
+</div>
+</section>
+
+
+{{!-- <section class="categories spad">
+<div class="container" >
+<div class="row">
+<div class="col-lg-3">
+<div class="categories__text">
+<h2>Clothings Hot <br /> <span>Shoe Collection</span> <br /> Accessories</h2>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="categories__hot__deal">
+<img src="img/xproduct-sale.png.pagespeed.ic.JhWwWRcVR-.png" alt="" data-pagespeed-url-hash="1370157075" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+<div class="hot__deal__sticker">
+<span>Sale Of</span>
+<h5>$29.99</h5>
+</div>
+</div>
+</div>
+<div class="col-lg-4 offset-lg-1">
+<div class="categories__deal__countdown">
+<span>Deal Of The Week</span>
+<h2>Multi-pocket Chest Bag Black</h2>
+<div class="categories__deal__countdown__timer" id="countdown">
+<div class="cd-item">
+<span>3</span>
+<p>Days</p>
+</div>
+<div class="cd-item">
+<span>1</span>
+<p>Hours</p>
+</div>
+<div class="cd-item">
+<span>50</span>
+<p>Minutes</p>
+</div>
+<div class="cd-item">
+<span>18</span>
+<p>Seconds</p>
+</div>
+</div>
+<a href="#" class="primary-btn">Shop now</a>
+</div>
+</div>
+</div>
+</div>
+</section> --}}
+
+
+{{!-- <section class="instagram spad">
+<div class="container">
+<div class="row">
+<div class="col-lg-8">
+<div class="instagram__pic">
+<div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-1.jpg"></div>
+<div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-2.jpg"></div>
+<div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-3.jpg"></div>
+<div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-4.jpg"></div>
+<div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-5.jpg"></div>
+<div class="instagram__pic__item set-bg" data-setbg="img/instagram/instagram-6.jpg"></div>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="instagram__text">
+<h2>Instagram</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+labore et dolore magna aliqua.</p>
+<h3>#Male_Fashion</h3>
+</div>
+</div>
+</div>
+</div>
+</section> --}}
+
+
+{{!-- <section class="latest spad">
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<div class="section-title">
+<span>Latest News</span>
+<h2>Fashion New Trends</h2>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-4 col-md-6 col-sm-6">
+<div class="blog__item">
+<div class="blog__item__pic set-bg" data-setbg="img/blog/blog-1.jpg"></div>
+<div class="blog__item__text">
+<span><img src="img/icon/xcalendar.png.pagespeed.ic.GXy2gYWDh7.png" alt="" data-pagespeed-url-hash="2804280352" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> 16 February 2020</span>
+<h5>What Curling Irons Are The Best Ones</h5>
+<a href="#">Read More</a>
+</div>
+</div>
+</div>
+<div class="col-lg-4 col-md-6 col-sm-6">
+<div class="blog__item">
+<div class="blog__item__pic set-bg" data-setbg="img/blog/blog-2.jpg"></div>
+<div class="blog__item__text">
+<span><img src="img/icon/xcalendar.png.pagespeed.ic.GXy2gYWDh7.png" alt="" data-pagespeed-url-hash="2804280352" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> 21 February 2020</span>
+<h5>Eternity Bands Do Last Forever</h5>
+<a href="#">Read More</a>
+</div>
+</div>
+</div>
+<div class="col-lg-4 col-md-6 col-sm-6">
+<div class="blog__item">
+<div class="blog__item__pic set-bg" data-setbg="img/blog/blog-3.jpg"></div>
+<div class="blog__item__text">
+<span><img src="img/icon/xcalendar.png.pagespeed.ic.GXy2gYWDh7.png" alt="" data-pagespeed-url-hash="2804280352" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> 28 February 2020</span>
+<h5>The Health Benefits Of Sunglasses</h5>
+<a href="#">Read More</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section> --}}
+
+
+<footer class="footer" style="margin-top: 10rem;">
+<div class="container" style="height: 45vh;">
+<div class="row">
+<div class="col-lg-3 col-md-6 col-sm-6">
+<div class="footer__about">
+<div class="footer__logo">
+<a class="limitedOffer text-secondary">Sneaker Game</a>
+</div>
+<p>We are more than just a shoe company.</p>
+<a href="#"><img src="img/xpayment.png.pagespeed.ic.jyKRwIPdRp.png" alt="" data-pagespeed-url-hash="1705052078" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a>
+</div>
+</div>
+<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+<div class="footer__widget">
+<h6>Shopping</h6>
+<ul>
+<li><a href="#">Clothing Store</a></li>
+<li><a href="#">Trending Shoes</a></li>
+<li><a href="#">Accessories</a></li>
+<li><a href="#">Sale</a></li>
+</ul>
+</div>
+</div>
+<div class="col-lg-2 col-md-3 col-sm-6">
+<div class="footer__widget">
+<h6>Shopping</h6>
+<ul>
+<li><a href="#">Contact Us</a></li>
+<li><a href="#">Payment Methods</a></li>
+<li><a href="#">Delivary</a></li>
+<li><a href="#">Return & Exchanges</a></li>
+</ul>
+</div>
+</div>
+<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+<div class="footer__widget">
+<h6>NewLetter</h6>
+<div class="footer__newslatter">
+<p>Be the first to know about new arrivals, look books, sales & promos!</p>
+<form action="#">
+<input type="text" placeholder="Your email">
+<button type="submit"><span class="icon_mail_alt"></span></button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-12 text-center">
+<div class="footer__copyright__text">
+
+<p>Copyright ©
+<script>
+                                document.write(new Date().getFullYear());
+                            </script>2020
+All rights reserved |by Sneaker Game</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+
+<div class="search-model">
+<div class="h-100 d-flex align-items-center justify-content-center">
+<div class="search-close-switch">+</div>
+<form class="search-model-form">
+<input type="text" id="search-input" placeholder="Search here.....">
+</form>
+</div>
+</div>
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js+jquery.nice-select.min.js.pagespeed.jc.ekxuW4by58.js"></script><script>eval(mod_pagespeed_JZzsHwPKPa);</script>
+<script>eval(mod_pagespeed_yAX9X7dlYR);</script>
+<script src="js/jquery.nicescroll.min.js+jquery.magnific-popup.min.js+jquery.countdown.min.js.pagespeed.jc.nQBr1vqAX8.js"></script><script>eval(mod_pagespeed_ICtRagVbiv);</script>
+<script>eval(mod_pagespeed_0Tm96Yey2q);</script>
+<script>eval(mod_pagespeed__0kegk3Rgl);</script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-23581568-13');
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"74447af60e506ee2","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}' crossorigin="anonymous"></script>

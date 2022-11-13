@@ -1,0 +1,300 @@
+<div class="container-xl px-4 mt-4">
+  <!-- Account page navigation-->
+  <nav class="nav nav-borders" style="background-color: transparent;">
+    <a class="nav-link" href="/user/profile" target="__blank">Profile</a>
+    <a class="nav-link active ms-0" href="/user/addressBook" target="__blank">Address Book</a>
+    <a class="nav-link" href="/user/wallet" target="__blank">Wallet</a>
+    
+  </nav>
+  <hr class="mt-0 mb-4"/>
+  <div class="row">
+
+    <div class="col-xl-8 bg-light">
+      <div>
+        
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
+        Add Address</button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Adress</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label= ></button>
+              </div>
+              <div class="modal-body">
+                    <form action="/user/addressBook" method="post">
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control text-capitalize" id="inputFirstName" type="text" name="firstName" placeholder="Enter your first name" >
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control text-capitalize" id="inputLastName" type="text" name="lastName" placeholder="Enter your last name" >
+                            </div>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="address">Address</label>
+                                {{!-- <input class="form-control" id="address" type="text" name="address" placeholder="Enter your address" > --}}
+                                <textarea class="form-control text-uppercase" id="address" name="address" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="zipcode">Zipcode</label>
+                                <input class="form-control" id="zipcode" type="text" name="zipcode" placeholder="zipcode" >
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="city">City</label>
+                                <input class="form-control text-uppercase" id="city" type="tel" name="city" placeholder="Enter your city" >
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="state">State</label>
+                                <input class="form-control text-uppercase" id="state" type="text" name="state" placeholder="Enter your state" >
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="country">Country</label>
+                                <input class="form-control text-uppercase" id="country" type="text" name="country" placeholder="Enter your country" >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="phoneNumber">Phone Number</label>
+                                <input class="form-control" id="phoneNumber" type="number" name="phoneNumber" placeholder="Enter your phone number" >
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+{{!--Adress in radio button--}}
+
+     <div class="grid p-5">
+      {{#each addressData}}
+     <label class="card">
+     <input name="plan" class="radio" type="radio" checked>
+      <span class="plan-details">
+      <span class="plan-type">{{this.address.firstName}} {{this.address.lastName}}</span>
+      
+      <span>{{this.address.address}}</span>
+      <span>{{this.address.city}}</span>
+      <span>{{this.address.state}}</span>
+      <span>{{this.address.zipcode}}</span>
+      <span>{{this.address.phoneNumber}}</span>
+      </span>
+      </label>  
+      {{/each}}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .card { box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%); }
+  .card.card-header { font-weight: 500; } 
+  .card-header:first-child { border-radius:
+  0.35rem 0.35rem 0 0; } 
+  .card-header { padding: 1rem 1.35rem; margin-bottom: 0;
+  border-bottom: 1px solid rgba(33, 40, 50, 0.125); } 
+  .form-control,
+  .dataTable-input { display: block; width: 100%; padding: 0.875rem 1.125rem;
+  font-size: 0.875rem; font-weight: 400; line-height: 1; color: #69707a;
+  background-color: #fff; background-clip: padding-box; border: 1px solid
+  #c5ccd6; -webkit-appearance: none; -moz-appearance: none; appearance: none;
+  border-radius: 0.35rem; transition: border-color 0.15s ease-in-out, box-shadow
+  0.15s ease-in-out; } 
+  .nav-borders .nav-link.active { color: #111;
+  border-bottom-color: #111; } 
+  .nav-borders .nav-link { color: #69707a;
+  border-bottom-width: 0.125rem; border-bottom-style: solid;
+  border-bottom-color: transparent; padding-top: 0.5rem; padding-bottom: 0.5rem;
+  padding-left: 0; padding-right: 0; margin-left: 1rem; margin-right: 1rem; }
+  
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+  :root {
+  --card-line-height: 1.2em;
+  --card-padding: 1em;
+  --card-radius: 0.5em;
+  --color-green: #111;
+  --color-gray: #e2ebf6;
+  --color-dark-gray: #c4d1e1;
+  --radio-border-width: 2px;
+  --radio-size: 1.5em;
+}
+
+
+
+.grid {
+  display: grid;
+  grid-gap: var(--card-padding);
+  margin: 0 auto;
+  max-width: 60em;
+  padding: 0;
+ 
+  @media (min-width: 42em) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background-color: #fff;
+  border-radius: var(--card-radius);
+  position: relative;
+  
+  &:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.radio {
+  font-size: inherit;
+  margin: 0;
+  position: absolute;
+  right: calc(var(--card-padding) + var(--radio-border-width));
+  top: calc(var(--card-padding) + var(--radio-border-width));
+}
+
+@supports(-webkit-appearance: none) or (-moz-appearance: none) { 
+  .radio {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #fff;
+    border: var(--radio-border-width) solid var(--color-gray);
+    border-radius: 50%;
+    cursor: pointer;
+    height: var(--radio-size);
+    outline: none;
+    transition: 
+      background 0.2s ease-out,
+      border-color 0.2s ease-out;
+    width: var(--radio-size); 
+
+    &::after {
+      border: var(--radio-border-width) solid #fff;
+      border-top: 0;
+      border-left: 0;
+      content: '';
+      display: block;
+      height: 0.75rem;
+      left: 25%;
+      position: absolute;
+      top: 50%;
+      transform: 
+        rotate(45deg)
+        translate(-50%, -50%);
+      width: 0.375rem;
+    }
+
+    &:checked {
+      background: var(--color-green);
+      border-color: var(--color-green);
+    }
+  }
+  
+  .card:hover .radio {
+    border-color: var(--color-dark-gray);
+    
+    &:checked {
+      border-color: var(--color-green);
+    }
+  }
+}
+
+.plan-details {
+  border: var(--radio-border-width) solid var(--color-gray);
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-padding);
+  transition: border-color 0.2s ease-out;
+}
+
+.card:hover .plan-details {
+  border-color: var(--color-dark-gray);
+}
+
+.radio:checked ~ .plan-details {
+  border-color: var(--color-green);
+}
+
+.radio:focus ~ .plan-details {
+  box-shadow: 0 0 0 2px var(--color-dark-gray);
+}
+
+.radio:disabled ~ .plan-details {
+  color: var(--color-dark-gray);
+  cursor: default;
+}
+
+.radio:disabled ~ .plan-details .plan-type {
+  color: var(--color-dark-gray);
+}
+
+.card:hover .radio:disabled ~ .plan-details {
+  border-color: var(--color-gray);
+  box-shadow: none;
+}
+
+.card:hover .radio:disabled {
+    border-color: var(--color-gray);
+  }
+
+.plan-type {
+  color: var(--color-green);
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1em;
+}
+
+.plan-cost {
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 0.5rem 0;
+}
+
+.slash {
+  font-weight: normal;
+}
+
+.plan-cycle {
+  font-size: 2rem;
+  font-variant: none;
+  border-bottom: none;
+  cursor: inherit;
+  text-decoration: none;
+}
+
+.hidden-visually {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+</style>

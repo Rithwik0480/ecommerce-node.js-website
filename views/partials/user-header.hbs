@@ -1,0 +1,121 @@
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+  crossorigin="anonymous"
+/>
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script
+  src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+></script>
+<script
+  src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+></script>
+<section>
+  <nav id="nav" class="d-flex justify-content-center" style="height: 80px;">
+
+    <div class="navTop col-md-2 ">
+      <div class="navItem" style="">
+        <a class="navbar-brand" href="/"><span class="limitedOffer">Sneaker Game</span></a>
+      </div>
+    </div>
+
+    <div class="col-md-5 navBottom p-3 justify-content-center">
+      <div class="d-flex ms-auto">
+        <a href="/user/shop/men"><h4 class="menuItem">MEN</h4></a>
+        <a href="/user/shop/women"><h4 class="menuItem">WOMEN</h4></a>
+        <a href="/user/shop/sports"><h4 class="menuItem">SPORTS</h4></a>
+        <a href="/user/shop/sneaker"><h4 class="menuItem">SNEAKERS</h4></a>
+      </div>
+          </div>
+
+      <div class="col-md-5 d-flex align-items-center ms-auto">
+        <div class="container h-100 bar">
+          <div class="d-flex justify-content-center h-100">
+            <div class="searchbar">
+              <form action="/user/search" method="get">
+                <input
+                class="search_input"
+                type="search"
+                name="search"
+                placeholder="Search..."
+              />
+              <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{! <h4 class="menuItem">COLLECTIONS</h4> }}
+
+        <div class="p-3">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              {{#if user}}
+                <a
+                  class="nav-link active badge"
+                  aria-current="page"
+                  href="/user/cart"
+                  style="height:30px; width:20px;"
+                ><i
+                    class="fa-solid fa-cart-shopping"
+                    style="font-size:15px;"
+                  ></i><span id="cart-count">{{cartNumber}}</span></a>
+              {{/if}}
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="p-3">
+          <a href="/user/profile" style="color: white;">
+            <i class="fa fa-user"></i>
+          </a>
+        </div>
+
+        <div class="p-3 float-right">
+          {{#if user}}
+            <a
+              style="text-decoration:none; color:white;"
+              href="/user/logout"
+            >Logout</a>
+          {{else}}
+            {{! <a href="/user/login" type="button" class="btn btn-dark">Login</a> }}
+            <a
+              style="text-decoration:none; color:white;"
+              href="/user/login"
+            >Login</a>
+          {{/if}}
+        </div>
+      </div>
+
+  </nav>
+</section>
+
+<style>
+
+  body,html{ height: 100%; width: 100%; margin: 0; padding: 0; background:
+  rgb(255, 255, 255) !important; }
+   .searchbar{ margin-bottom: auto; margin-top:
+  auto; height: 60px; background-color:#111; border-radius: 30px; padding: 10px;
+  }
+   .search_input{ color: white; border: 0; outline: 0; background: none; width:
+  0; caret-color:transparent; line-height: 40px; transition: width 0.4s linear;
+  }
+   .searchbar .search_input{ padding: 0 10px; width: 300px;
+  caret-color:rgb(132, 128, 128); transition: width 0.4s linear; }
+   .searchbar
+  .search_icon{ background: white; color: #111; }
+   .search_icon{ height: 40px;
+  width: 40px; float: right; display: flex; justify-content: center;
+  align-items: center; border-radius: 50%; color:white; text-decoration:none; background-color: #111;}
+</style>

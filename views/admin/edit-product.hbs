@@ -1,0 +1,45 @@
+<section>
+  <div class="container" style="margin-left:200px">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="text-center pt-3">Edit Product</h2>
+
+        
+          {{#each prodData}}
+          <form action="/admin/editProduct/{{this._id}}" method="post" enctype="multipart/form-data">
+            <label for="productName" class="pt-2 fw-bold">Product Name</label>
+            <input type="text" value="{{this.name}}" name="name" class="form-control" required />
+
+            <label for="category" class="pt-2 fw-bold">Select Category</label>
+            <select id="category" class="form-control" name="category">
+              <option selected="true" disabled="disabled">Choose Category</option> 
+              <option value="{{this.category}}">{{this.category}}</option> n>
+            </select>
+
+            <label class="pt-2 fw-bold" for="brand">Brand</label>
+            <input type="text" name="brand" value="{{this.brand}}" class="form-control" required/>
+
+            <label class="pt-2 fw-bold" for="description">Description</label>
+            <input type="text" name="description" value="{{this.description}}" class="form-control" required/>
+
+            <label class="pt-2 fw-bold" for="actualPrice"> Actual Price </label>
+            <input type="number" name="actualPrice" value="{{this.actualPrice}}" class="form-control" required/>
+
+            <label class="pt-2 fw-bold" for="offerPrice"> Offer Price </label>
+            <input type="number" name="offerPrice" value="{{this.offerPrice}}" class="form-control" required/>
+
+            <label class="pt-2 fw-bold" for="stock">Stock</label>
+            <input type="number" name="stock" value="{{this.stock}}" class="form-control" required/>
+
+            <label class="pt-2 fw-bold" for="productImage">Product Image</label>
+            <input type="file" class="form-control" name="image1" multiple/>
+
+            <button type="submit" class="btn btn-success mt-4">Submit</button>
+            </form>
+          {{/each}}
+        
+
+      </div>
+    </div>
+  </div>
+</section>

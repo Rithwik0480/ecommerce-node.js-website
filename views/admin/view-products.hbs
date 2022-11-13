@@ -1,0 +1,43 @@
+<section >
+     
+  <div class="container" style="margin-left:200px ;">
+    <table class="table mt-4 table-responsive">
+      <thead>
+        <tr>
+          <a class="btn btn-dark mt-5 float-end" href="/admin/add-product">ADD PRODUCT</a>
+          <th scope="col">No</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Price</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Category</th>            
+          <th scope="col">Image</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {{#each product}}
+          <tr>   
+            <td scope="row" class="fw-bold">{{{inc @index}}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.stock}}</td>
+            <td>{{this.offerPrice}}</td>
+            <td>{{this.brand}}</td>
+            <td>{{this.category}}</td>
+            <td><img style="width:100px; height:100px" src="{{this.image.[0]}}" alt="loading..."></td>
+            {{!-- edit product --}}
+            <form action="/admin/editProduct/{{this._id}}"><td><button class="btn btn-primary">edit</button></form>
+            {{!-- delete product --}}
+           <form action="/admin/deleteProduct/{{this._id}}" class="d-inline"> <button type="submit" id="d-btn" class="btn btn-danger" onclick="deleteProduct()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+            </svg>
+            </button></form></td>
+         </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+

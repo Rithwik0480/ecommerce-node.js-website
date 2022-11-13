@@ -1,0 +1,183 @@
+<section class="h-100 gradient-form" style="background-color: rgb(0, 0, 0);">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img
+                    src="/images/logo_sneaker_game_letras_negras_fondo_transp_3bb7c101-717d-45fe-b693-7a8b1c33b31a_2048x.webp"
+                    style="width: 185px;"
+                    alt="logo"
+                  />
+                  <h4 class="mt-1 mb-5 pb-1"></h4>
+                </div>
+
+                <form action="/user/login" method="post">
+                  <p>Please login to your account</p>
+                  {{#if loginErr}}
+                    <div
+                      class="alert alert-warning alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <strong>Invalid Credentials!</strong><br />Invalid
+                      username or password.
+                    </div>
+                  {{/if}}
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="email">Email</label>
+                    <input
+                      type="email"
+                      id="form2Example11"
+                      class="form-control"
+                      placeholder="email address"
+                      name="email"
+                    />
+
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="password">Password</label>
+                    <input
+                      type="password"
+                      id="myInput"
+                      class="form-control"
+                      name="password"
+                    />
+                    <input type="checkbox" onclick="myFunction()"/>Show
+                    Password
+                      <br>
+                    <button class="btn btn-outline-dark col-md-12" type="submit">Log in</button>
+                </form>
+                    <button type="button" class="btn btn-outline-dark mt-1 col-md-12" data-bs-toggle="modal" href="#exampleModalToggle">Login With Otp</button>
+                  </div>
+
+                  {{!-- <div class="text-center pt-1 mb-5 pb-1">
+                    <button
+                      class="btn btn-dark"
+                      type="submit">Log in</button>
+                  </div> --}}
+
+                  <div
+                    class="d-flex align-items-center justify-content-center pb-4"
+                  >
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <a href="/user/signup"><button
+                        type="button"
+                        class="btn btn-outline-dark"
+                      >Create new</button></a>
+                  </div>
+
+                {{!-- </form> --}}
+
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">We are more than just a shoe company</h4>
+                <p class="small mb-0">make your sneaker game on point with us</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>{{!--OTP Modal--}}
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Enter your mobile number</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post" id="numberVerify">
+      <div class="modal-body">
+        <p class="text-danger" id="invalidNumber"></p>
+       <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">+91</span>
+        <input type="text" class="form-control" placeholder="mobile number" aria-label="Username" name="phoneNumber" id="inputNumber" aria-describedby="basic-addon1">
+      </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-dark" type="submit">Send OTP</button>
+      </div>
+      
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+<form method="post" id="otpConfirm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">Enter OTP</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center align-items-center container">
+        <div class="card1 py-5 px-3">
+            <h5 class="m-0">Mobile phone verification</h5><span class="mobile-text">Enter the code we just send on your mobile phone</span><b class="text-danger" id="mobNo"> </b>
+            <div class="d-flex flex-row mt-5"><input name="otp" type="text" class="form-control" autofocus="" maxlength="1"><input name="otp" type="text" class="form-control" maxlength="1"><input name="otp" type="text" class="form-control" maxlength="1"><input name="otp" type="text" class="form-control" maxlength="1"><input name="otp" type="text" class="form-control" maxlength="1"><input name="otp" type="text" class="form-control" maxlength="1"></div>
+            <div class="text-center mt-5"><span class="d-block text-danger" id="invalidOtp"></span></div>
+        </div>
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-dark" type="submit">Confirm</button>
+      </div>
+    </div>
+    <input id="phNumber" type="hidden" name="phoneNumber">
+</form>
+  </div>
+</div>
+{{!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a> --}}
+</section>
+
+<style>
+  .card1 {
+  width: 350px;
+  padding: 10px;
+  border-radius: 20px;
+  background: #fff;
+  border: none;
+  height: 350px;
+  position: relative;
+}
+
+.container {
+  height: 50vh;
+}
+
+body {
+  background: #eee;
+}
+
+.mobile-text {
+  color: #989696b8;
+  font-size: 15px;
+}
+
+.form-control {
+  margin-right: 12px;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #111;
+  outline: 0;
+  box-shadow: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
+</style>

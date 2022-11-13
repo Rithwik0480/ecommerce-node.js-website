@@ -1,0 +1,185 @@
+<section class="d-flex justify-content-between">
+  <div class="bg-light col-6">
+    <div class="grid p-5">
+      <h3>Select Your Delivery Address</h3>
+      <form id="checkout-form" method="post">
+        <input type="hidden" name="userId" value="{{user._id}}" />
+        {{#each addressData}}
+          <label class="card">
+            <input
+              value="{{this.address._id}}"
+              name="addressId"
+              class="radio"
+              type="radio"
+              checked
+            />{{!Only address id is passed to user route from this form}}
+            <span class="plan-details">
+              <span class="plan-type">{{this.address.firstName}}</span>
+              <span>{{this.address.address}}</span>
+              <span>{{this.address.city}}</span>
+              <span>{{this.address.state}}</span>
+              <span>{{this.address.zipcode}}</span>
+              <span>{{this.address.phoneNumber}}</span>
+            </span>
+          </label>
+        {{/each}}
+        <input
+          value="{{totalPrice.total}}"
+          id="total-amount"
+          name="total"
+          type="hidden"
+        />
+        <input id="coupon-name" name="couponName" type="hidden" />
+        <a class="text-muted" href="/user/addressBook">add new adress?</a>
+        <div class="pt-5">
+          <h3>Select Payment Method</h3>
+          <input
+            name="paymentMethod"
+            value="COD"
+            id="paymentMethod"
+            type="radio"
+            checked
+          />
+          <label for="paymentMethod">Cash On Delivery</label>
+          <br />
+          <input
+            name="paymentMethod"
+            value="razorpay"
+            id="paymentMethod"
+            type="radio"
+          />
+          <label for="paymentMethod"><i class="fa fa-cc-visa"></i>
+            Online Payment</label>
+          <br />
+          <input
+            name="paymentMethod"
+            value="paypal"
+            id="paymentMethod"
+            type="radio"
+          />
+          <label for="paymentMethod"><i class="fa-brands fa-paypal"></i>
+            Pay Pal</label>
+          <br />
+          {{#if walletBal.walletBalance}}
+            <input
+              name="wallet"
+              value="{{walletBal.walletBalance}}"
+              id="paymentMethod"
+              type="checkbox"
+            />
+            <label for="wallet">Use Wallet Rs.({{walletBal.walletBalance}})</label>
+          {{/if}}
+        </div>
+        <button class="btn btn-dark col-12" type="submit">Check Out</button>
+      </form>
+    </div>
+  </div>
+
+  {{#if totalPrice}}
+    <div class="col-lg-3 me-5 mt-5">
+      <div class="card position-sticky top-0">
+        <div class="p-3 bg-light bg-opacity-10">
+          <h6 class="card-title mb-3">PRICE DETAILS</h6>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Subtotal</span>
+            <span>₹{{totalPrice.total}}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Shipping</span>
+            <span>free</span>
+          </div>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Coupon</span><span
+              class="text-danger"
+              id="couponAmount"
+            >0.00</span>
+          </div>
+          <hr />
+
+          <form action="/user/redeemCoupon" id="redeemCoupon">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Insert Coupon Code"
+                name="couponCode"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="submit"
+                id="button-addon2"
+              >Apply</button>
+            </div>
+            <div>
+              <p id="couponErr" class="text-danger"></p>
+            </div>
+          </form>
+          <div class="d-flex justify-content-between mb-4 small">
+            <span>Total</span>
+            <strong
+              class="text-dark fa fa-rupee"
+              id="finalPrice"
+            >{{totalPrice.total}}</strong>
+          </div>
+          <div class="form-check mb-3 small">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="subscribe"
+              required
+            />
+            <label class="form-check-label" for="subscribe">
+              Get emails about product updates and events. If you change your
+              mind, you can unsubscribe at any time.
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+</section>
+
+<style>
+  :root { --card-line-height: 1.2em; --card-padding: 1em; --card-radius: 0.5em;
+  --color-green: #111; --color-gray: #e2ebf6; --color-dark-gray: #c4d1e1;
+  --radio-border-width: 2px; --radio-size: 1em; } .grid { display: grid;
+  grid-gap: var(--card-padding); margin: 0 auto; max-width: 60em; padding: 0;
+  @media (min-width: 42em) { grid-template-columns: repeat(3, 1fr); } } .card {
+  background-color: #fff; border-radius: var(--card-radius); position: relative;
+  &:hover { box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15); } } .radio {
+  font-size: inherit; margin: 0; position: absolute; right:
+  calc(var(--card-padding) + var(--radio-border-width)); top:
+  calc(var(--card-padding) + var(--radio-border-width)); }
+  @supports(-webkit-appearance: none) or (-moz-appearance: none) { .radio {
+  background: #fff; border: var(--radio-border-width) solid var(--color-gray);
+  border-radius: 50%; cursor: pointer; height: var(--radio-size); outline: none;
+  transition: background 0.2s ease-out, border-color 0.2s ease-out; width:
+  var(--radio-size); &::after { border: var(--radio-border-width) solid #fff;
+  border-top: 0; border-left: 0; content: ''; display: block; height: 0.75rem;
+  left: 25%; position: absolute; top: 50%; transform: rotate(45deg)
+  translate(-50%, -50%); width: 0.375rem; } &:checked { background:
+  var(--color-green); border-color: var(--color-green); } } .card:hover .radio {
+  border-color: var(--color-dark-gray); &:checked { border-color:
+  var(--color-green); } } } .plan-details { border: var(--radio-border-width)
+  solid var(--color-gray); border-radius: var(--card-radius); cursor: pointer;
+  display: flex; flex-direction: column; padding: var(--card-padding);
+  transition: border-color 0.2s ease-out; } .card:hover .plan-details {
+  border-color: var(--color-dark-gray); } .radio:checked ~ .plan-details {
+  border-color: var(--color-green); } .radio:focus ~ .plan-details { box-shadow:
+  0 0 0 2px var(--color-dark-gray); } .radio:disabled ~ .plan-details { color:
+  var(--color-dark-gray); cursor: default; } .radio:disabled ~ .plan-details
+  .plan-type { color: var(--color-dark-gray); } .card:hover .radio:disabled ~
+  .plan-details { border-color: var(--color-gray); box-shadow: none; }
+  .card:hover .radio:disabled { border-color: var(--color-gray); } .plan-type {
+  color: var(--color-green); font-size: 1.5rem; font-weight: bold; line-height:
+  1em; } .plan-cost { font-size: 2.5rem; font-weight: bold; padding: 0.5rem 0; }
+  .slash { font-weight: normal; } .plan-cycle { font-size: 2rem; font-variant:
+  none; border-bottom: none; cursor: inherit; text-decoration: none; }
+  .hidden-visually { border: 0; clip: rect(0, 0, 0, 0); height: 1px; margin:
+  -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap;
+  width: 1px; }
+</style>

@@ -1,0 +1,67 @@
+
+
+<section>
+    <div class="container" style="padding-left:150px;">
+    <div class="p-3 text-center"><h1>Sales Report<span class="text-danger"> Sneaker Game</span></h1></div>
+      <div>
+        <div class="d-flex ">
+            <form action="/admin/sales-report" method="get">
+            <label for="month">Choose Month</label><br>
+            <input id="month" name="month" type="month">
+            <button style="" class="btn btn-sm btn-outline-dark" type="submit">Filter Month</button>
+            </form>
+            <form action="/admin/sales-report" method="get" class="ms-5">
+             <label for="daterange">Choose Date</label><br>
+            <input type="text" name="daterange" value="01/01/2022 - 12/30/2022"/>
+            <button class="btn btn-sm btn-outline-dark" type="submit">Filter Date</button>
+            </form>
+        </div>
+        <div class="text-end" >
+            <input type="button" id="rep" value="Download as Pdf" class="btn btn-secondary btn_print">
+            <input type="button" onclick="export_data()" value="Export to excel" class="btn btn-secondary btn_print">
+        </div>
+     </div>
+        <div class="container_content" id="container_content">
+            <div class="invoice-box">
+        <table class="table table-hover table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Order Id</th>
+          <th scope="col">Order Amount</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Delivered Date</th>            
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each deliveredOrders}}
+          <tr>   
+          <td scope="col"><strong>{{{inc @index}}}</strong></td>
+          <td scope="col">{{this._id}}</td>
+          <td scope="col">{{this.offerPrice}}</td>
+          <td scope="col">{{this.paymentMethod}}</td>
+          <td scope="col">{{this.statusUpdateDate}}</td> 
+            <td>{{this.status}}</td>
+         </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="3">Total Revenue. Rs<span class="text-danger">{{totalRevenue}}</span></td>
+      </tr>
+    </tfoot>
+      </table>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>

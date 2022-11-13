@@ -1,0 +1,84 @@
+<section>
+    <div class="container" style="padding-left:200px;">
+
+        <div class="me-3 w-100 ">
+            <button class="btn btn-dark btn-block border mt-5" data-bs-toggle="modal" data-bs-target="#add-coupons">
+                <i class="fas fa-plus me-3"></i>
+                Add Coupons
+            </button>
+            <table class="table table-striped mt-3" id="category-offer">
+                <thead>
+                    <tr>
+                        <th>Coupons</th>
+                        <th>Offer Percentage</th>
+                        <th>Minimum Price</th>
+                        <th>Expiry Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each coupons}}
+                    <tr id="{{this._id}}">
+                        <td>{{this.coupon}}</td>
+                        <td>{{this.percentage}} <span class="fa fa-percentage"></span></td>
+                        <td>{{this.minimumPrice}}</td>
+                        <td>{{this.expirydate}}</td>
+                        <td>
+                            {{!-- <a class="me-3" onclick="editCategoryOffer()"><i class="fas fa-pen-square"
+                                    style="color: blue;"></i></a> --}}
+                            <a onclick="deleteCoupon('{{this._id}}')"><i class="btn fa fa-trash"
+                                    style="color: red;"></i></a> 
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal fade" id="add-coupons" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="add-coupons-Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="order-md-1">
+                            <h4 class="mb-3">Add Coupons</h4>
+
+                            <form class="needs-validation" method="post" id="add-coupon-form">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control bg-light" id="coupon-code"
+                                        placeholder="Enter coupon code" name="coupon" value="" required>
+                                    <div class="invalid-feedback"> Please enter coupon code. </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control bg-light" id="coupon-percentage"
+                                        placeholder="Enter coupon offer in %" name="percentage" required>
+                                    <div class="invalid-feedback"> Please enter coupon offer. </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control bg-light" id="coupon-minimumOffer"
+                                        placeholder="Enter minimum price for this coupon" name="minimumPrice" required>
+                                    <div class="invalid-feedback"> Please enter minimum price. </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="coupon-expirydate">Expiry Date</label>
+                                    <input type="date" class="form-control bg-light" id="coupon-expirydate"
+                                        placeholder="expirydate" name="expirydate" required>
+                                    <div class="invalid-feedback"> Please enter expirydate. </div>
+                                </div>
+
+                                <hr class="mb-4">
+                                <button class="btn btn-dark btn-lg btn-block w-100" type="submit">Apply
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</section>

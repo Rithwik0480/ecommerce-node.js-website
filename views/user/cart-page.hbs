@@ -1,0 +1,118 @@
+<section>
+<div class="container">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="ibox">
+                <div class="ibox-title">
+                    {{#if user}}
+                    <span class="pull-right">(<strong>{{cartNumber}}</strong>)items</span>
+                    {{/if}}
+                    <h5>Items in your cart</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive rounded-4">
+                        <table class="table shoping-cart-table">
+
+                            <tbody>
+                            {{#each products}}
+                            <tr class="col-6 col-md-4">
+                                <td><img style="width: 150px; height:150px" src="{{this.product.image.[0]}}" alt="loading..."/></td>
+
+                                <td class="desc">
+                                    <h3>
+                                    <a href="#" class="text-dark" style="text-decoration:none ;">
+                                        {{this.product.name}}
+                                    </a>
+                                    </h3>
+                                    <p class="small">
+                                        {{this.product.description}}
+                                    </p>
+                                   
+
+                                    <div class="m-t-sm">
+                                        <button class="text-danger btn" onclick="removeProd('{{this.product._id}}')"><i class="fa fa-trash"></i> Remove item</button>
+                                    </div>
+                                </td>
+
+                               
+                <td width="180px">
+                <!-- Quantity -->
+                <div class="d-flex mb-4" style="max-width: 180px">
+                  <button id="minus{{this.product._id}}" class="btn btn-dark px-3 me-2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{this.product.stock}}',-1)"> <!-- '-1' means it is decrmnt button-->
+                   <i class="fa fa-minus"></i>
+                  </button>
+
+                  <div class="form-outline">
+                    <input id="{{this.product._id}}" name="quantity" value="{{this.quantity}}" type="number" class="form-control" />
+                   </div>
+
+                   <button id="plus{{this.product._id}}" class="btn btn-dark px-3 ms-2"
+                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{this.product.stock}}',1)"><!-- '1' means it is incrmnt button-->
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+                <!-- Quantity -->
+                                </td>
+                                <td>
+                                   <h4>
+                                    ₹{{this.product.offerPrice}}
+                                   </h4>
+                                    <s class="text-muted fa fa-inr">{{this.product.actualPrice}}</s>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+               {{#unless totalPrice}}
+               <div class="alert alert-info" role="alert">
+               Currently there is no products in your cart
+               </div>
+               {{/unless}}
+                <div class="ibox-content">
+                    <a href="/" class="btn btn-white"><i class="fa fa-arrow-left"></i> Continue shopping</a>
+                </div>
+            </div>
+        </div>
+
+<!--right section-->
+{{#if totalPrice}}
+ <div class="col-lg-3">
+        <div class="card position-sticky top-0">
+          <div class="p-3 bg-light bg-opacity-10">
+            <h6 class="card-title mb-3">PRICE DETAILS</h6>
+            <div class="d-flex justify-content-between mb-1 small">
+              <span>Subtotal</span> <span></span>
+            </div>
+            <div class="d-flex justify-content-between mb-1 small">
+              <span>Shipping</span> <span>free</span>
+            </div>
+            
+            <hr>
+            <div class="d-flex justify-content-between mb-4 small">
+              <span>Total</span> <strong id="total" class="text-dark">₹{{totalPrice.total}}</strong>
+            </div>
+            <div class="form-check mb-3 small">
+              <input class="form-check-input" type="checkbox" value="" id="subscribe" required>
+              <label class="form-check-label" for="subscribe">
+                Get emails about product updates and events. If you change your mind, you can unsubscribe at any time.
+              </label>
+            </div>
+            <a href="/user/place-order" class="btn btn-dark w-100 mt-2">Place Order</a>
+          </div>
+        </div>
+      </div>
+{{/if}}
+</section>
+
+
+
+
+
+
+
+
+

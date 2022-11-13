@@ -1,0 +1,54 @@
+<section>
+    <div class = "container" style="margin-left:200px">
+    <div class = "row">
+        <div class = "col-md-6">
+            <h2 class = "text-center" > Add Product </h2 >
+
+            
+            <form action="/admin/add-product" method="post" enctype="multipart/form-data" >
+   
+                <label for = "productName" >Product Name</label >
+                <input type = "text" name = "name" class = "form-control text-capitalize" required><br>
+                <div class="bg-light">
+                <label for="category">Select Category</label>
+                {{#each response}}
+                <br><input name="category" type="radio" value="{{this.category}}">{{this.category}}</input>
+                {{/each}}
+                </div>        
+                <label for = "brand" >Brand</label>
+                <input type = "text" name = "brand" class = "form-control text-capitalize" required>
+
+                <label for = "description" >Description</label>
+                <input type = "text" name = "description" class = "form-control" required>
+
+                <label for = "actualPrice" > Actual Price </label >
+                <input type = "number" name = "actualPrice" class = "form-control" required >
+
+                {{!-- <label for = "offerPrice" > Offer Price </label >
+                <input type = "number" name = "offerPrice" class = "form-control" required > --}}
+
+                 <label for = "stock" >Stock</label >
+                <input type = "number" name = "stock" class = "form-control" required>
+
+                <label for = "productImage" >Product Image 1</label>
+                <input type = "file" class = "form-control" name="image1">
+                <label for = "productImage" >Product Image 2</label>
+                <input type = "file" class = "form-control" name="image2">
+                <label for = "productImage" >Product Image 3</label>
+                <input type = "file" class = "form-control" name="image3">
+                <label for = "productImage" >Product Image 4</label>
+                <input type = "file" class = "form-control" name="image4">
+  
+                <button type = "submit" class = "btn btn-success mt-4" >Submit</button>
+
+
+            </form>
+
+    </div>
+    </div>
+    </div>
+    </section>
+
+<script>
+    $("select").removeAttr('style')
+</script>

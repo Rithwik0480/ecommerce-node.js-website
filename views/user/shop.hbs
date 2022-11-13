@@ -1,0 +1,219 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/A.bootstrap.min.css+font-awesome.min.css+elegant-icons.css+magnific-popup.css+nice-select.css+owl.carousel.min.css+slicknav.min.css+style.css,Mcc.f6PPq5zNCp.css.pagespeed.cf.5SlTa9kfBa.css" type="text/css" />
+
+<section class="breadcrumb-option">
+  <div class="container" style="height:2rem;">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb__text">
+                  <h2>{{categoryName}} collection</h2>
+          <div class="breadcrumb__links">
+            <a href="/">Home</a>
+            <a href="/"><span>Shop</span></a>
+            <span>{{categoryName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="shop spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="shop__sidebar">
+          <div class="shop__sidebar__search">
+            <form action="/products" method="get">
+              <input type="text" placeholder="Search..." name="search">
+              <button type="submit"><span class="icon_search"></span></button>
+            </form>
+          </div>
+          <div class="shop__sidebar__accordion">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-heading">
+                  <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <div class="shop__sidebar__categories">
+                      <ul class="nice-scroll">
+                        {{#each categories}}
+                        <li><a href="/products?categoryId={{this._id}}">{{this.category}}</a></li>
+                        {{/each}}
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-heading">
+                  <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                </div>
+                <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <div class="shop__sidebar__brand">
+                      <ul>
+                        {{#each brands}}
+                        <li><a href="/products?brandId={{this._id}}">{{this.brand}}</a></li>
+                        {{/each}}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="shop__product__option">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="shop__product__option__left">
+                <p>Showing 1–9 of {{proCount}} results</p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="shop__product__option__right">
+                <p>Sort by Price:</p>
+                <div class="dropdown">
+                  <button class=" dropdown-toggle border-0 opacity-25" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" onclick="sort(1)">Low - High</a></li>
+                    <li><a class="dropdown-item" onclick="sort(-1)">High - Low</a></li>
+                    {{!-- href="?sort=1" --}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {{#each product}}
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item">
+            <a href="/user/productDetails/{{this._id}}">
+            <div class="product__item__pic set-bg" data-setbg="{{this.image.[0]}}">
+            <span class="label"><s class="text-danger" style="font-size:1rem;">₹{{this.actualPrice}}</s></span>
+            <ul class="product__hover">
+
+            <li><a href="/user/productDetails/{{this._id}}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAMAAADjcdz2AAAABGdBTUEAALGPC/xhBQAAAORQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFsLyIwAAAEt0Uk5TABB1xu7MfxY/5fiteJ/x71A79sIgEaT9TAjexweh7V7+Kw/sqMSXzpRn5pJm6Kq+kMP7IwndugORPbETjk9D8GOK4/oByPKCFU551a0uSgAAAJ5JREFUGNNdy9UWggAURNGDHSi2mJhgYWJ3i/7///gAyFrO2+y5F0DweH0+fyCInVA4EhU9sbiUsHoylc4AZHN5GaBQLJXt00pVAJRa3fltNEWg1eYXtQ1oHRe6PUDruzDQgeHIhfEEUKYzpxu6CBjzxdKGlSQArFObLYCx++yt4aAf1ZNyvhyv6s0SQbxLD+35Mn/ixLzu+JfAn8jvLyoND535naQeAAAAAElFTkSuQmCC" alt="" data-pagespeed-url-hash="3756334862" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a><a href="/user/productDetails/{{this._id}}"><span>View Product</span></a></li>
+            </ul>
+            </div>
+            </a>
+            <div class="product__item__text">
+            <a href="/user/productDetails/{{this._id}}"></a>
+            <h6>{{this.name}}</h6>
+            <a class="add-cart"><button onclick="addToCart('{{this._id}}')" style="background:none; border:none ;">Add to Bag <i class="fa fa-shopping-cart"></i></button></a>
+            <h5>Rs.{{this.offerPrice}}</h5>
+            </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <div class="row">
+          {{#if searchProduct}}
+          {{#each searchProduct}}
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item">
+            <a href="/user/productDetails/{{this._id}}">
+            <div class="product__item__pic set-bg" data-setbg="{{this.image.[0]}}">
+            <span class="label"><s class="text-danger" style="font-size:1rem;">₹{{this.actualPrice}}</s></span>
+            <ul class="product__hover">
+
+            <li><a href="/user/productDetails/{{this._id}}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAMAAADjcdz2AAAABGdBTUEAALGPC/xhBQAAAORQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFsLyIwAAAEt0Uk5TABB1xu7MfxY/5fiteJ/x71A79sIgEaT9TAjexweh7V7+Kw/sqMSXzpRn5pJm6Kq+kMP7IwndugORPbETjk9D8GOK4/oByPKCFU551a0uSgAAAJ5JREFUGNNdy9UWggAURNGDHSi2mJhgYWJ3i/7///gAyFrO2+y5F0DweH0+fyCInVA4EhU9sbiUsHoylc4AZHN5GaBQLJXt00pVAJRa3fltNEWg1eYXtQ1oHRe6PUDruzDQgeHIhfEEUKYzpxu6CBjzxdKGlSQArFObLYCx++yt4aAf1ZNyvhyv6s0SQbxLD+35Mn/ixLzu+JfAn8jvLyoND535naQeAAAAAElFTkSuQmCC" alt="" data-pagespeed-url-hash="3756334862" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a><a href="/user/productDetails/{{this._id}}"><span>View Product</span></a></li>
+            </ul>
+            </div>
+            </a>
+            <div class="product__item__text">
+            <a href="/user/productDetails/{{this._id}}"></a>
+            <h6>{{this.name}}</h6>
+            <a class="add-cart"><button onclick="addToCart('{{this._id}}')" style="background:none; border:none ;">Add to Bag <i class="fa fa-shopping-cart"></i></button></a>
+            <h5>Rs.{{this.offerPrice}}</h5>
+            </div>
+            </div>
+          </div>
+          {{/each}}
+          {{else}}
+          <section>
+                        <div class="d-flex justify-content-center vh-100">
+                            <div class="text-center">
+                                <p class="fs-3"> <span class="text-danger">Opps!</span> No Items found.</p>
+                                <p class="lead">
+                                    The product you’re looking for doesn’t exist.
+                                </p>
+                                <a href="/" class="btn btn-dark">Home Page</a>
+                            </div>
+                        </div>
+                    </section>
+          {{/if}}
+
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="product__pagination">
+              {{#each page}}
+              <a class="active" href="/products?&p={{this}}">{{this}}</a>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<div class="search-model">
+  <div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="search-close-switch">+</div>
+    <form class="search-model-form">
+      <input type="text" id="search-input" placeholder="Search here.....">
+    </form>
+  </div>
+</div>
+
+
+<script>
+  //sort
+  function sort(number) {
+    let url = new URL(window.location.href);
+    let params = new URLSearchParams(url.search);
+    params.set('sort', number);
+    let newParams = params.toString();
+    location.href = window.location.protocol + "//" + window.location.host + '/products?' + newParams;
+  }
+</script>
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js+jquery.nice-select.min.js.pagespeed.jc.ekxuW4by58.js"></script><script>eval(mod_pagespeed_JZzsHwPKPa);</script>
+<script>eval(mod_pagespeed_yAX9X7dlYR);</script>
+<script src="js/jquery.nicescroll.min.js+jquery.magnific-popup.min.js+jquery.countdown.min.js.pagespeed.jc.nQBr1vqAX8.js"></script><script>eval(mod_pagespeed_ICtRagVbiv);</script>
+<script>eval(mod_pagespeed_0Tm96Yey2q);</script>
+<script>eval(mod_pagespeed__0kegk3Rgl);</script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-23581568-13');
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"74447af60e506ee2","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}' crossorigin="anonymous"></script>
+
