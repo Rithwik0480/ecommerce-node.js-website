@@ -33,7 +33,7 @@ module.exports = {
       }
     });
   },
-
+// this function used to get all users 
   getAllUsers: () => {
     return new Promise((resolve, reject) => {
       db.get()
