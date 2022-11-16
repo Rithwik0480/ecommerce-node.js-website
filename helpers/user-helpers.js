@@ -7,7 +7,8 @@ let objId = require("mongodb").ObjectId;
 const Razorpay = require("razorpay");
 const paypal = require("../utils/paypal")
 const { response } = require("express");
-const razorpay=require("../utils/razorpay")
+const razorpay=require("../utils/razorpay");
+const { resolve } = require("path");
 //razorpay instance
 const instance = new Razorpay({
   key_id: razorpay.key_id,
@@ -118,7 +119,8 @@ return new Promise((resolve, reject) => {
       let userCart = await db
         .get()
         .collection(collection.CART_COLLECTION)
-        .findOne({ user: objId(userId) });
+        .findOne({ user: objId(userId) })
+        
       if (userCart) {
         let prodExist = userCart.product.findIndex(
           (product) => product.item == prodId
@@ -134,7 +136,8 @@ return new Promise((resolve, reject) => {
               }
             )
             .then(() => {
-              resolve();
+              // resolve()
+              reject()
             });
         } else {
           db.get()
@@ -147,6 +150,7 @@ return new Promise((resolve, reject) => {
             )
             .then((response) => {
               resolve();
+
             });
         }
       } else {
@@ -218,7 +222,7 @@ return new Promise((resolve, reject) => {
         .collection(collection.CART_COLLECTION)
         .findOne({ user: objId(userId) })
         .then((cart) => {
-          if (cart) resolve(cart.product.length);
+          if (cart) resolve(cart.product.length)
         });
     });
   },
@@ -609,8 +613,14 @@ return new Promise((resolve, reject) => {
         });
     });
   },
-
-  getAddressList: (userId) => {
+//coupon details
+getCoupons:()=>{
+return new Promise(async(resolve, reject) => {
+  let couponInfo = await db.get().collection(collections.COUPON_COLLECTION).find({}).toArray()
+  resolve(couponInfo)
+})
+},
+  getAddressList: (userId,addressId) => {
     return new Promise(async (resolve, reject) => {
       let addressData = await db
         .get()
@@ -712,28 +722,78 @@ return new Promise((resolve, reject) => {
     });
   },
 
-  // changePaymentStatus:(orderId,userId,products)=>{
-  //   return new Promise((resolve,reject)=>{
+//get edit address
+getEditAddress:(userId,addressId)=> {
+  return new Promise(async (resolve, reject) => {
+    let addressData = await db
+      .get()
+      .collection(collections.USER_COLLECTION)
+      .aggregate(
+        [{
+          $match: {
+           _id: ObjectId(userId)
+          }
+         }, {
+          $unwind: {
+           path: '$address'
+          }
+         }, {
+          $match: {
+           'address._id': ObjectId(addressId)
+          }
+         }, {
+          $project: {
+           address: 1
+          }
+         }]
+      )
+      .toArray();
+    resolve(addressData);
+  });
+},
+//post edited address
+updateAddress:(userId,addressId,addressDetails)=> {
+  var address = {
 
-  //     db.get().collection(collections.ORDER_COLLECTION)
-  //     .updateOne({_id:ObjectId(orderId)},{
-  //       $set:{
-  //         'products.$.status':'placed'
-  //       }
-  //     }).then(()=>{
-  //       products.forEach(item=>{
-  //         db.get()
-  //         .collection(collections.PRODUCT_COLLECTION)
-  //         .updateOne({_id:ObjectId(item.productId)},{$inc:{stock:-(item.quantity)}})
-  //         })
+    firstname: addressDetails.firstName,
+    lastname: addressDetails.lastName,
+    address: addressDetails.address,
+    zipcode: addressDetails.zipcode,
+    city: addressDetails.city,
+    state: addressDetails.state,
+    country: addressDetails.country,
+    phoneNumber: addressDetails.phoneNumber,
+   
 
-  //       db.get()
-  //           .collection(collection.CART_COLLECTION)
-  //           .deleteOne({ user: ObjectId(userId)})
+}
+  
 
-  //       resolve()
-  //     })
 
-  //   })
-  // },
-};
+  return new Promise(async(resolve,reject)=> {
+    console.log({address},{addressId},{userId})
+    await db.get().collection(collections.USER_COLLECTION).updateOne(
+      {
+        _id:ObjectId(userId),
+        'address._id':ObjectId(addressId),
+      },
+      {
+       $set:{
+       "address.$.firstName":address.firstname,
+       "address.$.lastName":address.lastname,
+       "address.$.address":address.address,
+       "address.$.zipcode":address.zipcode,
+       "address.$.city":address.city,
+       "address.$.state":address.state,
+       "address.$.country":address.country,
+       "address.$.phoneNumber":address.phoneNumber,
+      
+      }
+    }).then((response)=>{
+      console.log({response})
+     
+    })
+    resolve()
+  })
+}
+
+}

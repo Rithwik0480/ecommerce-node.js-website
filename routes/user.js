@@ -1,7 +1,7 @@
 var express = require("express")
 var router = express.Router()
 const MongoClient = require("mongodb").MongoClient
-const auth = require("../utils/auth")
+const auth = require("../config/auth")
 const client = require("twilio")(auth.accountsId, auth.authToken)
 const userHelpers = require("../helpers/user-helpers")
 const productHelpers=require("../helpers/product-helpers")
@@ -24,6 +24,16 @@ const verifyCart=(req,res,next)=>{
   next()
   }else{
     res.json({status:false})
+  }
+}
+
+redirect = function(req, res, next){
+  if (!req.session.userid) {
+      req.session.redirectTo = "/user"+req.path
+      next();
+      // res.redirect('/login');
+  } else {
+      next();
   }
 }
 
@@ -67,7 +77,6 @@ router.post("/verifyNumber",(req,res)=>{
         .catch((err) => {
           console.log(err)
         })
-    ////////////////////////////////////////
     res.json(response)
   }).catch((response)=>{
     res.json({msg:"Invalid Phone Number"})
@@ -98,11 +107,9 @@ otp=req.body.otp.join('')
       }
     })
     .catch((err) => {
-      console.log("ERRRRRRRRRRRRRRRRRRRRRRR");
       console.log(err)
       res.json({status:false})
     })
-/////////////////////////////////////////////
 
 })
 //user login & otp auth
@@ -114,7 +121,8 @@ router.post("/login", (req, res) => {
     if(response.status){
       req.session.loggedIn=true
       req.session.user=response.user
-      res.redirect('/')
+      // res.redirect('/')
+      res.redirect(req.session.redirectTo)
     }else{
       req.session.loginErr=true
       res.redirect('/user/login')
@@ -123,20 +131,20 @@ router.post("/login", (req, res) => {
 })
 
 //logout user
-router.get("/logout", (req, res) => {
+router.get("/logout",(req, res) => {
   req.session.destroy();
   res.redirect("/");
 })
 
 //search bar
-router.get("/search",verifyLogin,(req,res)=> {
+router.get("/search",(req,res)=> {
   productHelpers.getSearchBar(req.query.search).then((searchProduct)=>{
-    res.render("user/shop",{searchProduct,user:req.session.user})
+    res.render("user/search-page",{searchProduct,user:req.session.user})
   })
 })
 
 //single product details page
-router.get("/productDetails/:id",(req,res)=>{
+router.get("/productDetails/:id",redirect,(req,res)=>{
   productId=req.params.id
   let cartNumber=null
   let userId=req.session.user
@@ -151,17 +159,16 @@ router.get("/productDetails/:id",(req,res)=>{
   })
 
 })
-//shop page
-// router.get("/shop",verifyLogin,(req,res)=>{
-//   productHelpers.getAllProducts().then((product)=>{
-//     res.render("user/shop",{product,user:req.session.user})
-//   })
-// })
-router.get("/shop/:id",verifyLogin,(req,res)=>{
+
+router.get("/shop/:id",redirect,async(req,res)=>{
   let categoryName=req.params.id
+  let userId=req.session.user._id
+  let cartNumber=null
+  await userHelpers.cartCount(userId).then((count)=>{
+    cartNumber=count
+    })
   productHelpers.getShop(categoryName).then((product)=> {
-    console.log(product,"FFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-    res.render("user/shop",{product,categoryName,user:req.session.user})
+    res.render("user/shop",{product,categoryName,user:req.session.user,cartNumber})
   })
 })
 //cart
@@ -178,11 +185,13 @@ router.get("/cart",verifyLogin,(req,res)=>{
     })
   })
 })
-
+   
 //add to cart
-router.get("/addToCart/:id",verifyCart,(req,res)=>{
-  userHelpers.addToCart(req.params.id,req.session.user._id).then((response)=>{
+router.get("/addToCart/:id",redirect,verifyCart,(req,res)=>{
+  userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
     res.json({status:true})
+  }).catch(()=>{
+    res.json({exist:true})
   })
 })
 
@@ -207,8 +216,9 @@ router.get('/removeProduct/:id',(req,res)=>{
 router.get('/place-order',verifyLogin,async(req,res)=>{
 let totalPrice= await userHelpers.totalPrice(req.session.user._id)
 let walletBal= await userHelpers.userWallet(req.session.user._id)
+let couponInfo= await userHelpers.getCoupons()
 userHelpers.getAddressList(req.session.user._id).then((addressData)=>{    
-  res.render('user/place-order',{user:req.session.user,addressData,totalPrice,walletBal})
+  res.render('user/place-order',{user:req.session.user,addressData,totalPrice,walletBal,couponInfo})
 })  
 })
 
@@ -247,7 +257,7 @@ router.post('/place-order',async (req,res)=>{
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3000/user/success",
+            "return_url": "http://sneakergame.shop/user/success",
             "cancel_url": "http://cancel.url"
         },
         "transactions": [{
@@ -276,8 +286,6 @@ router.post('/place-order',async (req,res)=>{
             res.json({url:payment.links[i].href,paypal:true})
           }
         }
-          
-
       }
   })
     }   
@@ -319,6 +327,28 @@ router.get('/addressBook',verifyLogin,(req,res)=>{
   userHelpers.getAddressList(req.session.user._id).then((addressData)=>{
     res.render('user/address-book',{user:req.session.user,addressData})
   })
+})
+//edit address
+router.get('/editAddress',(req,res)=>{
+  let addressId=req.query.addressId
+  let userId=req.session.user._id
+  userHelpers.getEditAddress(userId,addressId).then((addressData)=>{
+    res.json(addressData)
+  })
+  })
+//edit address post
+router.post('/editAddress/:id',(req,res)=>{
+  console.log(req.body,req.session.user)
+  let addressId=req.body.AddressId
+  let userId=req.session.user._id
+  let addressData=req.body
+  userHelpers.updateAddress(userId,addressId,addressData).then(()=>{
+    if(req.params.id=="book")
+    res.redirect("/user/addressBook")
+    else
+    res.redirect("/user/place-order")
+  })
+})     
 //wallet
 router.get('/wallet',verifyLogin,(req,res)=>{
   userHelpers.userWallet(req.session.user._id).then((walletDetails)=>{
@@ -326,13 +356,17 @@ router.get('/wallet',verifyLogin,(req,res)=>{
   })
 })
  
-})
+
 //add address book data
-router.post('/addressBook',(req,res)=>{
+router.post('/addressBook/:id',(req,res)=>{
   let addressData=req.body
   let userId=req.session.user._id
   userHelpers.addressBook(addressData,userId).then((response)=>{
+    if(req.params.id==="book")
    res.redirect('/user/addressBook')
+   else{
+    res.redirect('/user/place-order')
+   }
   })
 })
 
@@ -356,7 +390,6 @@ router.put('/cancelOrder',(req,res)=>{
 router.put('/returnOrder',(req,res)=>{
   orderId=req.body.orderId
   prodId=req.body.prodId
-  console.log(req.body,"FFFFFFFFFFFFFFFFFFFFFFFFFFF")
   userHelpers.returnOrder(orderId,prodId).then((response)=>{
     res.json({status:true})
   })

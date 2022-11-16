@@ -170,26 +170,6 @@ module.exports = {
   //sales report-delivered order list
   deliveredOrderList: (yy, mm) => {
     return new Promise(async (resolve, reject) => {
-      // let agg = [
-      //   {
-      //     $match: {
-      //       status: "delivered",
-      //     },
-      //   },
-      //   {
-      //     $unwind: {
-      //       path: "$products",
-      //     },
-      //   },
-      //   {
-      //     $project: {
-      //       totalPrice: "$totalPrice",
-      //       paymentMethod: 1,
-      //       statusUpdateDate: 1,
-      //       status: 1,
-      //     },
-      //   },
-      // ];
       let agg = 
         [
           {
@@ -280,7 +260,13 @@ module.exports = {
     })
 
   },
-
+//number of active users
+getActiveUsers:()=> {
+  return new Promise(async(resolve,reject)=> {
+   users=await db.get().collection(collections.USER_COLLECTION).find({}).count()
+   resolve(users)
+  })
+},
   //bargraph values
   barGraph:()=>{
     return new Promise(async(resolve,reject)=>{
@@ -293,6 +279,37 @@ module.exports = {
         resolve(value)
     })
 
-  }
+  },
+  //piechart values
+  pieChart:()=>{
+    return new Promise(async(resolve, reject) => {
+      let pievalue={}
+      pievalue.razorpayCount= await db.get().collection(collections.ORDER_COLLECTION).find({'paymentMethod':'razorpay'}).count()
+      pievalue.codCount= await db.get().collection(collections.ORDER_COLLECTION).find({'paymentMethod':'COD'}).count() 
+      pievalue.paypalCount= await db.get().collection(collections.ORDER_COLLECTION).find({'paymentMethod':'paypal'}).count() 
+      resolve(pievalue)
+    })
+  },
+  //vertical bar graph
+verticalBar:()=>{
+  return new Promise(async(resolve, reject) => {
+    let verticalVal={}
 
+    men= [{$unwind: {path: '$products'}},{$match: {'products.productInfo.category':'men'}}, {$count: 'products'}]
+    women= [{$unwind: {path: '$products'}},{$match: {'products.productInfo.category':'women'}}, {$count: 'products'}]
+    sports= [{$unwind: {path: '$products'}},{$match: {'products.productInfo.category':'sports'}}, {$count: 'products'}]
+    sneaker= [{$unwind: {path: '$products'}},{$match: {'products.productInfo.category':'sneaker'}}, {$count: 'products'}]
+
+  men = await db.get().collection(collections.ORDER_COLLECTION).aggregate(men).toArray()
+  women = await db.get().collection(collections.ORDER_COLLECTION).aggregate(women).toArray()
+  sports = await db.get().collection(collections.ORDER_COLLECTION).aggregate(sports).toArray()
+  sneaker = await db.get().collection(collections.ORDER_COLLECTION).aggregate(sneaker).toArray()
+
+  verticalVal.men=men[0].products
+  verticalVal.women=women[0].products
+  verticalVal.sports=sports[0].products
+  verticalVal.sneaker=sneaker[0].products
+  resolve(verticalVal)
+})
+},
 }

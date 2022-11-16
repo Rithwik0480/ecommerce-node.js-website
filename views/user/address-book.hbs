@@ -4,6 +4,7 @@
     <a class="nav-link" href="/user/profile" target="__blank">Profile</a>
     <a class="nav-link active ms-0" href="/user/addressBook" target="__blank">Address Book</a>
     <a class="nav-link" href="/user/wallet" target="__blank">Wallet</a>
+    <a class="nav-link" href="/user/orders" target="__blank">Your Orders</a>
     
   </nav>
   <hr class="mt-0 mb-4"/>
@@ -23,7 +24,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label= ></button>
               </div>
               <div class="modal-body">
-                    <form action="/user/addressBook" method="post">
+                    <form action="/user/addressBook/book" method="post">
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
@@ -89,7 +90,7 @@
      <div class="grid p-5">
       {{#each addressData}}
      <label class="card">
-     <input name="plan" class="radio" type="radio" checked>
+     {{!-- <input name="plan" class="radio" type="radio"> --}}
       <span class="plan-details">
       <span class="plan-type">{{this.address.firstName}} {{this.address.lastName}}</span>
       
@@ -98,6 +99,8 @@
       <span>{{this.address.state}}</span>
       <span>{{this.address.zipcode}}</span>
       <span>{{this.address.phoneNumber}}</span>
+      <button onclick="editAddress('{{this.address._id}}')" style="all: unset; cursor:pointer;" type="button" class="btn btn-white d-flex flex-row-reverse text-secondary" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+      edit <i class="fa-solid fa-pen-to-square"></i></button>
       </span>
       </label>  
       {{/each}}
@@ -107,6 +110,77 @@
   </div>
 </div>
 
+
+
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adress</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label= ></button>
+              </div>
+              <div class="modal-body">
+                    <form action="/user/editAddress/book" method="post">
+                    <input type="hidden" id="editAddressId" name="AddressId">
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control text-capitalize " id="editFirstName" type="text" name="firstName" placeholder="" >
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control text-capitalize" id="editLastName" type="text" name="lastName" placeholder="Enter your last name" >
+                            </div>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="address">Address</label>
+                                {{!-- <input class="form-control" id="address" type="text" name="address" placeholder="Enter your address" > --}}
+                                <textarea class="form-control text-uppercase" id="editaddress" name="address" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="zipcode">Zipcode</label>
+                                <input class="form-control" id="editzipcode" type="text" name="zipcode" placeholder="zipcode" >
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="city">City</label>
+                                <input class="form-control text-uppercase" id="editcity" type="tel" name="city" placeholder="Enter your city" >
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="state">State</label>
+                                <input class="form-control text-uppercase" id="editstate" type="text" name="state" placeholder="Enter your state" >
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="country">Country</label>
+                                <input class="form-control text-uppercase" id="editcountry" type="text" name="country" placeholder="Enter your country" >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="phoneNumber">Phone Number</label>
+                                <input class="form-control" id="editphoneNumber" type="number" name="phoneNumber" placeholder="Enter your phone number" >
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
 <style>
   .card { box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%); }
   .card.card-header { font-weight: 500; } 

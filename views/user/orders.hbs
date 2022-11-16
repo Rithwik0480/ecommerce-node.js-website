@@ -1,11 +1,12 @@
 <section>
-    <div class="container" style="margin-left:100px">
-        {{!-- <div class="title mb-5">
-            <p>Hai, &#128075; {{user.username}}</p>
-        </div> --}}
-        <div class="d-flex align-items-center mb-4">
-            <div class="text-decor"><h2 class="text-muted mt-3">Order History</h2></div>
-        </div>
+    <div class="container mt-4" style="margin-left:100px">
+    <nav class="nav nav-borders" style="background-color: transparent;">
+        <a class="nav-link" href="/user/profile" target="__blank">Profile</a>
+        <a class="nav-link" href="/user/addressBook" target="__blank">Address Book</a>
+        <a class="nav-link" href="/user/wallet" target="__blank">Wallet</a>
+        <a class="nav-link active ms-0" href="/user/orders" target="__blank">Your Orders</a>
+    </nav>
+    <hr class="mt-0 mb-4">
 
         {{#each orders}}
         <div class="card mb-3">
@@ -66,4 +67,54 @@
     background-color: rgba(96,93,175,.2);
     color: #605daf;
 }
+
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+    font-weight: 500;
+}
+.card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control, .dataTable-input {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #69707a;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c5ccd6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.35rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+ .nav-borders .nav-link.active { color: #111;
+  border-bottom-color: #111; } 
+  
+.nav-borders .nav-link {
+    color: #69707a;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
 </style>

@@ -147,10 +147,11 @@
         
         <div>
           <div class="d-flex">
-
+            {{#if ../user}}
             <button onclick="addToCart('{{this._id}}')" class="btn btn-outline-dark">Add to Bag</button>
-            <button onclick="addToWishlist('{{this._id}}')" class="btn btn-outline-dark">Wishlist</button>
-
+            {{else}}
+            <a href="/user/login" class="btn btn-outline-dark">Add to Bag</a>
+            {{/if}}
           </div>
         </div>
       </div>

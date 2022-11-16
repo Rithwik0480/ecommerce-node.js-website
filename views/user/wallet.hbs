@@ -4,6 +4,8 @@
         <a class="nav-link" href="/user/profile" target="__blank">Profile</a>
         <a class="nav-link" href="/user/addressBook" target="__blank">Address Book</a>
         <a class="nav-link active active" href="/user/wallet" target="__blank">Wallet</a>
+        <a class="nav-link" href="/user/orders" target="__blank">Your Orders</a>
+
     </nav>
     <hr class="mt-0 mb-4">
 
@@ -21,7 +23,7 @@
     <div class="card mt-5" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">My Referral ID</h5>
-    <p class="card-text">{{walletDetails.referralId}}</p>
+    <p class="card-text">{{walletDetails.referralId}}</p><button onclick="copy('{{walletDetails.referralId}}','#copy_button_5')" id="copy_button_5" class="btn btn-sm btn-dark copy-button">Copy</button>
     </div>
     </div>
     </section>
@@ -80,3 +82,19 @@
     margin-right: 1rem;
 }
 </style>
+
+<script>
+    function copy(text, target) {
+setTimeout(function() {
+$('#copied_tip').remove();
+}, 800);
+$(target).append("<div class='tip' id='copied_tip'>Copied!</div>");
+var input = document.createElement('input');
+input.setAttribute('value', text);
+document.body.appendChild(input);
+input.select();
+var result = document.execCommand('copy');
+document.body.removeChild(input)
+return result;
+}
+</script>

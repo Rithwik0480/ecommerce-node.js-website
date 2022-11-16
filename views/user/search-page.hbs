@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__text">
-                  <h2>{{categoryName}} collection</h2>
+                  <h2>collection</h2>
           <div class="breadcrumb__links">
             <a href="/">Home</a>
             <a href="/"><span>Shop</span></a>
@@ -25,7 +25,7 @@
       <div class="col-lg-3">
         <div class="shop__sidebar">
           <div class="shop__sidebar__search">
-                <form action="/user/search" method="get">
+<form action="/user/search" method="get">
                 <input
                 class="search_input"
                 type="search"
@@ -100,8 +100,10 @@
             </div>
           </div>
         </div>
+        
         <div class="row">
-          {{#each product}}
+          {{#if searchProduct}}
+          {{#each searchProduct}}
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="product__item">
             <a href="/user/productDetails/{{this._id}}">
@@ -116,18 +118,27 @@
             <div class="product__item__text">
             <a href="/user/productDetails/{{this._id}}"></a>
             <h6>{{this.name}}</h6>
-            {{#if ../user}}
             <a class="add-cart"><button onclick="addToCart('{{this._id}}')" style="background:none; border:none ;">Add to Bag <i class="fa fa-shopping-cart"></i></button></a>
-            {{else}}
-            <a class="add-cart" href="/user/login"><button style="background:none; border:none ;">Add to Bag <i class="fa fa-shopping-cart"></i></button></a>
-            {{/if}}           
             <h5>Rs.{{this.offerPrice}}</h5>
             </div>
             </div>
           </div>
           {{/each}}
+          {{else}}
+          <section>
+                        <div class="d-flex justify-content-center vh-100">
+                            <div class="text-center">
+                                <p class="fs-3"> <span class="text-danger">Opps!</span> No Items found.</p>
+                                <p class="lead">
+                                    The product you’re looking for doesn’t exist.
+                                </p>
+                                <a href="/" class="btn btn-dark">Home Page</a>
+                            </div>
+                        </div>
+                    </section>
+          {{/if}}
+
         </div>
-       
         <div class="row">
           <div class="col-lg-12">
             <div class="product__pagination">

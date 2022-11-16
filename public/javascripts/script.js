@@ -59,10 +59,17 @@ function addToCart(prodId) {
           timer: 800,
           showConfirmButton: false,
         })
-      }else{
+      }else if(response.exist){
+        swal({
+          title: "Product added to cart",
+          text: false,
+          timer: 800,
+          showConfirmButton: false,
+        })
+      }
+      else{
         location.href="/user/login"
       }
-
       // location.reload()
     },
   });
@@ -388,11 +395,85 @@ function export_data() {
   XLSX.writeFile(fp, "Sneaker Game(Sales Report).xlsx");
 }
 
-//bar graph
+//dashboard page
 window.addEventListener("load", () => {
   barFunction(1);
+  pieFunction();
+  vertbarFunction()
 });
 
+//vertical bar graph
+function vertbarFunction(){
+  $.ajax({
+    url: "/admin/dashboard/verticalBar",
+    method: "get",
+    success: (response) => {
+      if (response) {
+        var xValues = [
+          "Men",
+          "Women",
+          "Sneakers",
+          "Sports",
+        ];
+        var yValues = [
+          response.men,
+          response.women,
+          response.sneaker,
+          response.sports,  ];
+
+        new Chart(document.getElementById("bar-chart-horizontal"), {
+          type: 'horizontalBar',
+          data: {
+            labels: [
+              "Men",
+              "Women",
+              "Sneakers",
+              "Sports",
+            ],
+            datasets: [
+              {
+                label: "Products Sold(quantity)",
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 205, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(201, 203, 207, 0.2)'
+                ],    borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(255, 159, 64)',
+                  'rgb(255, 205, 86)',
+                  'rgb(75, 192, 192)',
+                  'rgb(54, 162, 235)',
+                  'rgb(153, 102, 255)',
+                  'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1,
+                data: [
+                  response.men,
+                  response.women,
+                  response.sneaker,
+                  response.sports,
+                  0, 
+                ]
+              }
+            ]
+          },
+          options: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: 'Category Based Sales'
+            }
+          }
+      });
+      }
+    },
+  });
+}
+//bar graph
 function barFunction(days) {
   $.ajax({
     url: "/admin/dashboard" + days,
@@ -413,16 +494,31 @@ function barFunction(days) {
           response.pendingCount,
           response.placedCount,
         ];
-
-        var barColors = ["red", "green", "blue", "orange", "brown"];
-
+        
         new Chart("myChart", {
           type: "bar",
           data: {
             labels: xValues,
             datasets: [
               {
-                backgroundColor: barColors,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 205, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(201, 203, 207, 0.2)'
+                ],    borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(255, 159, 64)',
+                  'rgb(255, 205, 86)',
+                  'rgb(75, 192, 192)',
+                  'rgb(54, 162, 235)',
+                  'rgb(153, 102, 255)',
+                  'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1,
                 data: yValues,
               },
             ],
@@ -431,13 +527,60 @@ function barFunction(days) {
             legend: { display: false },
             title: {
               display: true,
-              text: "Sales Status Chart",
+              text: "Order Status Chart",
             },
             scales: {
               yAxes: [{ ticks: { min: 0 } }],
             },
           },
         });
+      }
+    },
+  });
+}
+//pie chart
+function pieFunction(){
+  $.ajax({
+    url: "/admin/dashboard/piechart",
+    method: "get",
+    success: (response) => {
+      if (response) {
+        var xValues = [
+          "COD",
+          "Razorpay",
+          "Paypal",
+        ];
+        var yValues = [
+          response.razorpayCount,
+          response.codCount,
+          response.paypalCount
+        ];
+
+        // var barColors = ["red", "green", "blue", "orange", "brown"];
+
+        new Chart(document.getElementById("doughnut-chart"), {
+          type: 'doughnut',
+          data: {
+            labels: ["COD", "Razorpay", "Paypal"],
+            datasets: [
+              {
+                label: "Population (millions)",
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                data: [response.codCount,response.razorpayCount,response.paypalCount]
+              }
+            ]
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'Payment Method Info'
+            }
+          }
+        })
       }
     },
   });
@@ -574,3 +717,25 @@ $("#redeemCoupon").submit((e) => {
     },
   });
 });
+//edit address
+function editAddress(addressId,userId){
+$.ajax({
+  url:"/user/editAddress",
+  method:"get",
+  data:{
+    addressId
+  },
+  success:(addressData)=>{
+  console.log(addressData[0].address.firstName)
+  $('#editFirstName').val(addressData[0].address.firstName)
+  $('#editLastName').val(addressData[0].address.lastName)
+  $('#editaddress').val(addressData[0].address.address)
+  $('#editzipcode').val(addressData[0].address.zipcode)
+  $('#editcity').val(addressData[0].address.city)
+  $('#editstate').val(addressData[0].address.state)
+  $('#editcountry').val(addressData[0].address.country)
+  $('#editphoneNumber').val(addressData[0].address.phoneNumber)
+  $('#editAddressId').val(addressData[0].address._id)
+   }
+})
+}

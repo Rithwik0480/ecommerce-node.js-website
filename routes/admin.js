@@ -48,7 +48,16 @@ router.post("/adminLogin", (req, res) => {
 });
 
 //landing page
-router.get("/", (req, res, next) => {
+redirect = function(req, res, next){
+  if (!req.session.userid) {
+      req.session.redirectTo = req.path;
+      next();
+      // res.redirect('/login');
+  } else {
+      next();
+  }
+}
+router.get("/",redirect,(req, res, next) => {
   let user = req.session.user;
   let cartNumber = null;
   if (user) {
@@ -212,18 +221,36 @@ router.get("/admin/sales-report", async (req, res) => {
   res.render("admin/sales-report", { admin: true, deliveredOrders,totalRevenue})
 })
 
-//dashboard
+//dashboard graph
 router.get("/admin/dashboard:days",(req,res)=>{
   adminHelpers.barGraph().then((response)=>{
-  res.json(response)
-  
-  })
-  
+  res.json(response) 
+  }) 
+})
+//dashboard
+router.get("/admin/dashboard",async(req,res)=>{
+deliveredOrders = await adminHelpers.deliveredOrderList()
+totalOrders=deliveredOrders.length
+activeUsers=await adminHelpers.getActiveUsers()
+let totalRevenue=await adminHelpers.getTotalRevenue(deliveredOrders)
+res.render('admin/dashboard',{admin: true, totalOrders,totalRevenue,activeUsers})
 })
 
-router.get("/admin/dashboard",(req,res)=>{
-res.render('admin/dashboard',{admin:true})
+//dashboard pie chart
+router.get("/admin/dashboard/piechart",(req,res)=>{
+  adminHelpers.pieChart().then((response)=>{
+    res.json(response)
+  })
 })
+
+//dashboard vertical bar
+router.get("/admin/dashboard/verticalBar",(req,res)=>{
+  adminHelpers.verticalBar().then((response)=> {
+    res.json(response)
+  })
+})
+
+
 
 //product offers
 router.get("/admin/offers",async(req,res)=>{
