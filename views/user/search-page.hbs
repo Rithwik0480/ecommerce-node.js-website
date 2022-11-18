@@ -38,26 +38,10 @@
           <div class="shop__sidebar__accordion">
             <div class="accordion" id="accordionExample">
               <div class="card">
-                <div class="card-heading">
-                  <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
-                </div>
-                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                  <div class="card-body">
-                    <div class="shop__sidebar__categories">
-                      <ul class="nice-scroll">
-                        {{#each categories}}
-                        <li><a href="/products?categoryId={{this._id}}">{{this.category}}</a></li>
-                        {{/each}}
 
-                      </ul>
-                    </div>
-                  </div>
-                </div>
               </div>
               <div class="card">
-                <div class="card-heading">
-                  <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
-                </div>
+
                 <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="shop__sidebar__brand">
@@ -80,21 +64,15 @@
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="shop__product__option__left">
-                <p>Showing 1–9 of {{proCount}} results</p>
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="shop__product__option__right">
-                <p>Sort by Price:</p>
                 <div class="dropdown">
                   <button class=" dropdown-toggle border-0 opacity-25" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
                   </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" onclick="sort(1)">Low - High</a></li>
-                    <li><a class="dropdown-item" onclick="sort(-1)">High - Low</a></li>
-                    {{!-- href="?sort=1" --}}
-                  </ul>
+
                 </div>
               </div>
             </div>

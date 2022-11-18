@@ -27,7 +27,6 @@ module.exports={
         console.log(product)
         resolve(product)
     })
-  
   },
 //shop page
 getShop(categoryName){
@@ -224,7 +223,6 @@ let user= await db.get().collection(collections.COUPON_COLLECTION).findOne({$and
 //search bar
 getSearchBar:(key)=> {
   return new Promise(async(resolve, reject) => {
-    console.log(key,"DDDDDDDDDDDDDDDDDDDDDDDDDDDD");
     let data=await db.get().collection(collections.PRODUCT_COLLECTION).find({
 
       "$or":[
@@ -234,7 +232,6 @@ getSearchBar:(key)=> {
       ]
     }).toArray()
     if(data.length !=null) {
-      console.log(data,"kkkkkkkkkkkkkkkkkkkkkkkk");
       resolve(data)
     }else {
       reject()

@@ -754,7 +754,6 @@ getEditAddress:(userId,addressId)=> {
 //post edited address
 updateAddress:(userId,addressId,addressDetails)=> {
   var address = {
-
     firstname: addressDetails.firstName,
     lastname: addressDetails.lastName,
     address: addressDetails.address,
@@ -763,12 +762,7 @@ updateAddress:(userId,addressId,addressDetails)=> {
     state: addressDetails.state,
     country: addressDetails.country,
     phoneNumber: addressDetails.phoneNumber,
-   
-
 }
-  
-
-
   return new Promise(async(resolve,reject)=> {
     console.log({address},{addressId},{userId})
     await db.get().collection(collections.USER_COLLECTION).updateOne(
@@ -794,6 +788,6 @@ updateAddress:(userId,addressId,addressDetails)=> {
     })
     resolve()
   })
-}
+},
 
 }

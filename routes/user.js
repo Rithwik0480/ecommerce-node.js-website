@@ -94,12 +94,10 @@ otp=req.body.otp.join('')
     })
     .then((data) => {
       if (data.status == "approved"  ) {
-        console.log("SUUUUUUUUUCEEESSSSSSSS");
         req.session.loggedIn = true
         // res.redirect("/")
         res.json({status:true})
       } else {
-        console.log("wrongoooooootp");
         req.session.loggedIn = false
         req.session.user = null
         res.json({status:false})
@@ -162,11 +160,13 @@ router.get("/productDetails/:id",redirect,(req,res)=>{
 
 router.get("/shop/:id",redirect,async(req,res)=>{
   let categoryName=req.params.id
-  let userId=req.session.user._id
   let cartNumber=null
-  await userHelpers.cartCount(userId).then((count)=>{
-    cartNumber=count
+  if(req.session.user){
+      let userId=req.session.user._id
+      await userHelpers.cartCount(userId).then((count)=>{
+      cartNumber=count
     })
+  }
   productHelpers.getShop(categoryName).then((product)=> {
     res.render("user/shop",{product,categoryName,user:req.session.user,cartNumber})
   })
