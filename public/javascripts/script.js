@@ -346,7 +346,15 @@ var options = {
   offset: { vertical: 100, horizontal: 10 },
   scale: 0.5,
 };
-new ImageZoom(document.getElementById("img-container"), options);
+// new ImageZoom(document.getElementById("img-container"), options);
+
+
+$(document).ready(function () {
+  $(".block__pic").imagezoomsl({
+      zoomrange: [2, 2]
+      // options
+  });
+});
 
 //DATE RANGE PICKER
 $(function () {
@@ -739,3 +747,4 @@ $.ajax({
    }
 })
 }
+
