@@ -1,4 +1,4 @@
 node_modules
 utils
 .env
-config/auth.js
+/config/auth.js
