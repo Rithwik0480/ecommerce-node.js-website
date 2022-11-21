@@ -40,7 +40,7 @@ router.post("/adminLogin", (req, res) => {
     if (response.status) {
       req.session.adminloggedIn = true;
       req.session.admin = response.admin;
-      res.redirect("/admin/ViewProducts");
+      res.redirect("/admin/dashboard");
     } else {
       res.redirect("/adminLogin");
     }
@@ -52,7 +52,6 @@ redirect = function(req, res, next){
   if (!req.session.userid) {
       req.session.redirectTo = req.path;
       next();
-      // res.redirect('/login');
   } else {
       next();
   }

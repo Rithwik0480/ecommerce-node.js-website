@@ -94,13 +94,15 @@
 <div class="row product__filter">
 {{#each product}}
 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">{{!--Card--}}
+
 <div class="product__item">
-<a href="/user/productDetails/{{this._id}}">
 <div class="product__item__pic set-bg" data-setbg="{{this.image.[0]}}">
+<a href="/user/productDetails/{{this._id}}"><img src="{{this.image.[0]}}"></a>
 <span class="label"><s class="text-danger" style="font-size:1rem;">₹{{this.actualPrice}}</s></span>
 <ul class="product__hover">
 <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAMAAADjcdz2AAAABGdBTUEAALGPC/xhBQAAAORQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFsLyIwAAAEt0Uk5TABB1xu7MfxY/5fiteJ/x71A79sIgEaT9TAjexweh7V7+Kw/sqMSXzpRn5pJm6Kq+kMP7IwndugORPbETjk9D8GOK4/oByPKCFU551a0uSgAAAJ5JREFUGNNdy9UWggAURNGDHSi2mJhgYWJ3i/7///gAyFrO2+y5F0DweH0+fyCInVA4EhU9sbiUsHoylc4AZHN5GaBQLJXt00pVAJRa3fltNEWg1eYXtQ1oHRe6PUDruzDQgeHIhfEEUKYzpxu6CBjzxdKGlSQArFObLYCx++yt4aAf1ZNyvhyv6s0SQbxLD+35Mn/ixLzu+JfAn8jvLyoND535naQeAAAAAElFTkSuQmCC" alt="" data-pagespeed-url-hash="3756334862" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"><a href="/user/productDetails/{{this._id}}"><span>View Product</span></a></li>
 </ul>
+
 </div>
 </a>
 <div class="product__item__text">
@@ -114,6 +116,7 @@
 <h5>Rs.{{this.offerPrice}}</h5>
 </div>
 </div>
+
 </div>
 {{/each}}
 </div>
